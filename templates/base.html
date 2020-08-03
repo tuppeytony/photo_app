@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ static_url('css/bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{ static_url('css/bootstrap-responsive.css') }}" />
+    <!-- <link rel="stylesheet" href="{{ static_url('css/sticky-footer.css') }}" /> -->
+    {% block magic %}{% end %}
+    {% block signin_head %}{% end %}
+    <title>{{ title_page }}</title>
+  </head>
+    <body>
+      <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
+            <a class="brand" href="#">Фотокарточки!</a>
+              <ul class="nav">
+                <li><a href="/">На главную</a></li>
+                {% if current_user %}
+                <li><a href="/new_album">Создать альбом</a></li>
+                <li><a href="/logout">Выйти</a></li>
+                {% end %}
+                {% if not current_user %}
+                <li><a href="/signin">Авторизация</a></li>
+                <li><a href="/registration">Регистрация</a></li>
+                {% end %}
+      </ul>
+      </div>
+    </div>
+
+<div id="wrap">
+
+        {% block registration %}{% end %}
+        {% block body_signin %}{% end %}
+{% if current_user %}
+
+        {% block index %}{% end %}
+        {% block currentAlbom %}{% end %}
+        {% block album %}{% end %}
+        {% block edit_album %}{% end %}
+        {% block edit_photo %}{% end %}
+        
+{% end %}
+</div>
+
+          <div id="footer">
+            <div class="container">
+            <h3>Тут футер!</h3>
+            <script src="{{ static_url('script/jquery.js') }}"></script>
+            <script src="{{ static_url('script/bootstrap.min.js') }}"></script>
+
+            {% block signin_footer %}{% end %}
+            <script src="{{ static_url('script/main.js') }}"></script>
+            <script src="{{ static_url('script/jquery.magnific-popup.js') }}"></script>
+
+          </div>
+        </div>
+    </body>
+</html>

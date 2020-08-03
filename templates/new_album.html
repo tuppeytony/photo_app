@@ -1,0 +1,17 @@
+{% extends base.html %}
+
+{% block album %}
+<h2 class="text-center">Создание альбома!</h2>
+
+<form class="form-check-input text-center" method="POST">
+<p>Название альбома</p>
+<input required name="title" type="text" placeholder="Напишите название альбома">
+
+<br/>
+<p>Описание альбома</p>
+<textarea required type="text" name="description" rows="3" placeholder="Напишите описание альбома"></textarea>
+<br/>
+<button class="btn btn-primary">Создать!</button>
+</form>
+
+{% end %}

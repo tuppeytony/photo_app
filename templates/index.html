@@ -1,0 +1,51 @@
+{% extends base.html %}
+
+{% block index %}
+    <h1>Добро пожаловать!</h1>
+    <p>Этот сайт сделан для обмена картинками, фотографими!</p>
+    <p>Создавайте свои альбомы, делитесь впечатлениями с другими!</p>
+    
+
+
+
+<div class="container">
+
+
+
+  {% for post in db %}
+  <div class="thumbnail span3">
+
+        <h3>{{ post[1] }}</h3>
+        <p>{{ post[2] }}</p>
+        <p>Опубликован: <strong>{{ post[4] }}</strong></p>
+        <a href="album/{{ post[0] }}?page=1" class="btn btn-info">Открыть альбом</a>
+        <p name="id_album" hidden>{{ post[0] }}</p>
+        <p hidden name="id_user">{{ post[5] }}</p>
+
+        {% if post[5] == user %}
+        
+      <form action="/edit_album">
+      <input name="id_album" hidden value="{{ post[0] }}"/>
+      <button class="btn btn-warning">
+        Редактировать альбом
+      </button>
+      </form>
+
+      <form method="POST">
+        <input name="id_album" hidden value="{{ post[0] }}"/>
+        <button type="submit" class="btn btn-danger">
+          Удалить альбом
+        </button>
+      </form>
+
+    </div>
+
+
+{% end %}
+
+</div>
+
+{% end %}
+
+
+{% end %}

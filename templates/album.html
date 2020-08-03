@@ -1,0 +1,83 @@
+{% extends base.html %}
+
+{% block currentAlbom %}
+
+{% block magic %}
+<link rel="stylesheet" href="{{ static_url('css/magnific-popup.css') }}" />
+{% end %}
+
+
+
+<a href="#myModal" role="button" class="btn btn-success btn-block" data-toggle="modal">Добавить фотографию</a>
+
+<div class="container">
+
+    {% for post in albumDB %}
+
+  <div class="span3 photo">
+    <img src="{{ post[2] }}" href="{{ post[2] }}" alt ="{{ post[0] }}" class="img-polaroid">
+    <h3 class="title">{{ post[0] }}</h3>
+    <p class="description">{{ post[1] }}</p>
+    <p>Добавлено: <strong>{{ post[3] }}</strong></p>
+    <p hidden>{{ post[4] }}</p>
+
+    {% if post[6] == user %}
+
+    <form method="GET" action="/edit_photo">
+    <button class="btn btn-info edit">Редактировать</button>
+    <input hidden name="id_photo" value="{{ post[5] }}"/>
+    </form>
+    <form action="/delete_photo" method="POST">
+    <button class="btn btn-danger">Удалить</button>
+    <input hidden name="id_album" value="{{ post[4] }}"/>
+    <input hidden name="id_photo" value="{{ post[5] }}"/>
+    </form>
+    {% end %}
+
+
+  </div>
+
+
+
+{% end %}
+
+
+
+
+<div data-backdrop="true" class="modal" id="myModal" tabindex="-1" 
+role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Добавление фотографии!</h3>
+  </div>
+  <div class="modal-body">
+    <form method="post" class="form-check-input" enctype="multipart/form-data">
+      <p>Добавить фотографию</p>
+      <input required name="title" type="text">
+      <br/>
+      <p>Описание фотографии</p>
+      <textarea required type="text" name="description" rows="3" placeholder="Напишите описание альбома"></textarea>
+      <br/>
+      <p>Загрузить фотографию</p>
+      <input type="file" required name="src" accept=".jpg, .jpeg" value="Выберите фотографию">
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Закрыть</button>
+    <button type="submit" class="btn btn-primary">Добавить!</button>
+  </form>
+  </div>
+</div>
+
+
+</div>
+
+<div class="pagination pagination-centered">
+  <ul>
+    <li><a href="?page=1">1</a></li>
+    <li><a href="?page=2">2</a></li>
+    <li><a href="?page=3">3</a></li>
+    <li><a href="?page=4">4</a></li>
+  </ul>
+</div>
+
+{% end %}

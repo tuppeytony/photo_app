@@ -1,0 +1,12 @@
+__pycache__
+.vscode
+12
+bootsrap
+bot
+demos
+node_modules
+test
+database_test.py
+config.py
+album/*
+os_check.py

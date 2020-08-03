@@ -1,0 +1,21 @@
+{% extends base.html %}
+
+{% block edit_album %}
+
+{% for post in albumDB %}
+
+<div class="container">
+<h2>Редактировать альбом</h2>
+<form action="/edit_album" class="form-check-input" method="POST">
+    <p>Название альбома</p>
+    <input required name="title" type="text" value="{{ post[1] }}" />
+    <br/>
+    <p>Описание альбома</p>
+    <textarea required type="text" name="description" rows="3">{{ post[2] }}</textarea>
+    <br/>
+    <input value="{{ post[0] }}" name="id_album" hidden />
+  <button type="submit" class="btn btn-info">Редактировать!</button>
+</form>
+</div>
+{% end %}
+{% end %}
